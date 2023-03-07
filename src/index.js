@@ -16,7 +16,7 @@ import { getChangedFiles, getStagedFiles, gitAdd, gitCommit } from './git.js'
 
 intro(
   colors.inverse(
-    ` Asistente para la creación de commits por ${colors.yellow(' @midudev ')}`
+    ` Asistente para la creación de commits y ramas por ${colors.cyan(' @monicatvera ')}`
   )
 )
 
@@ -69,7 +69,7 @@ const commitMessage = await text({
 
 if (isCancel(commitMessage)) exitProgram()
 
-const { emoji, release } = COMMIT_TYPES[commitType]
+const { release } = COMMIT_TYPES[commitType]
 
 let breakingChange = false
 if (release) {
@@ -87,7 +87,7 @@ if (release) {
   if (isCancel(breakingChange)) exitProgram()
 }
 
-let commit = `${emoji} ${commitType}: ${commitMessage}`
+let commit = `${commitType}: ${commitMessage}`
 commit = breakingChange ? `${commit} [breaking change]` : commit
 
 const shouldContinue = await confirm({
