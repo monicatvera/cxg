@@ -27,3 +27,8 @@ export async function gitAdd ({ files = [] } = {}) {
   const { stdout } = await execAsync(`git add ${filesLine}`)
   return cleanStdout(stdout)
 }
+
+export async function gitBranch ({ branch } = {}) {
+  const { stdout } = await execAsync(`git checkout -b "${branch}"`)
+  return cleanStdout(stdout)
+}
