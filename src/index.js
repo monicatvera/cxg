@@ -10,7 +10,7 @@ import {
 import colors from 'picocolors'
 import { trytm } from '@bdsqqq/try'
 
-import { exitProgram, camelize } from './utils.js'
+import { exitProgram, snakeCase } from './utils.js'
 import { COMMIT_TYPES } from './commit-types.js'
 import { BRANCH_TYPES } from './branch-types.js'
 import { getChangedFiles, getStagedFiles, gitAdd, gitBranch, gitCommit } from './git.js'
@@ -36,6 +36,8 @@ const selectedAction = await select({
     { value: 'commit', label: 'Crear un commit nuevo' }
   ]
 })
+
+if (isCancel(selectedAction)) exitProgram()
 
 if (selectedAction === 'commit') {
   if (stagedFiles.length === 0 && changedFiles.length > 0) {
@@ -162,7 +164,7 @@ if (selectedAction === 'commit') {
 
   if (isCancel(branchMessage)) exitProgram()
 
-  const branch = `${branchType}/${idUS}-${camelize(branchMessage)}`
+  const branch = `${branchType}/${idUS}_${snakeCase(branchMessage)}`
 
   const shouldContinue = await confirm({
     initialValue: true,

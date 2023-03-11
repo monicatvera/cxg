@@ -1,6 +1,6 @@
 {
   "name": "cxg",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Asistente de creacion de commit y ramas",
   "type": "module",
   "bin": {
